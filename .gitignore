@@ -1,0 +1,5 @@
+.idea/**
+*.iml
+docker-compose.yaml
+__pycache__/**
+config.py
