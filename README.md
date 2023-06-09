@@ -7,6 +7,7 @@ Based on [OpenAI Whisper](https://github.com/openai/whisper) and [this repo](htt
 ```shell
 pip install pydub, python-telegram-bot, openai-whisper
 ```
+It also requires `ffmpeg` to be installed in the system.
 
 ## Extra work
 
