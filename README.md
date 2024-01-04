@@ -16,3 +16,16 @@ You need to create `config.py` file with the following content
 TG_TOKEN = 'token from botfather'
 my_allowed_chat_ids = '123,1234,12345'
 ```
+
+
+## With podman
+
+```shell
+podman build -t indie-voice-to-text-bot .
+podman run -d localhost/indie-voice-to-text-bot:latest -t indie-voice-to-text-bot
+```
+create systemd service
+```shell
+podman generate systemd indie-voice-to-text-bot > ~/.config/systemd/user/indie-voice-to-text-bot.service
+systemctl --user enable --now indie-voice-to-text-bot.service
+```

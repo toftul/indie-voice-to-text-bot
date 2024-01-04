@@ -1,0 +1,5 @@
+pydub==0.25.1
+python_telegram_bot==20.7
+python-telegram-bot[all]==20.7
+#openai-whisper==20231117
+openai-whisper @ git+https://github.com/openai/whisper.git

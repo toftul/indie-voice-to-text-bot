@@ -116,7 +116,7 @@ bot_token = TG_TOKEN #os.environ.get("TELEGRAM_BOT_TOKEN")
 allowed_chat_ids = my_allowed_chat_ids #os.environ.get("ALLOWED_CHAT_IDS", default="").split(",")
 file_download_path = "/tmp/whispering-for-chaos"
 device = os.environ.get("WHISPER_DEVICE", default="cpu")
-whisper_model = os.environ.get("WHISPER_MODEL", default="base")  # tiny, base, small, medium, large
+whisper_model = os.environ.get("WHISPER_MODEL", default="large")  # tiny, base, small, medium, large
 escaping_chars = ['_', '*', '[', ']', '(', ')', '~', '>', '+', '-', '=', '|', '{', '}', '.', '!']
 logging.info(f"configuration: device={device}, whisper_model={whisper_model} allowed_chat_ids={allowed_chat_ids}")
 logging.info(f"Up to load whisper model, this might take a bit")
