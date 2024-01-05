@@ -94,13 +94,29 @@ async def process_voice_message(update: Update, context: ContextTypes.DEFAULT_TY
         processing_time = (final_time - start_time)
 
         response_message = await get_as_markdown(result, processing_time)
-        await context.bot.send_message(
-            chat_id=effective_chat_id, text=response_message, reply_to_message_id=message_id,
-            parse_mode=telegram.constants.ParseMode.MARKDOWN_V2
-        )
+        
+        message_text_limit = telegram.constants.MessageLimit.MAX_TEXT_LENGTH
+        if len(response_message) > message_text_limit:
+            logging.info(f"Chunking message. Length = {len(response_message)}, max length = {message_text_limit}")
+            message_chunks = [response_message[i:i+message_text_limit] 
+                              for i in range(0, len(response_message), message_text_limit)]
+
+            # Send each chunk as a separate message
+            for chunk in message_chunks:
+                await context.bot.send_message(
+                    chat_id=effective_chat_id, text=chunk, reply_to_message_id=message_id,
+                    parse_mode=telegram.constants.ParseMode.MARKDOWN_V2
+                )
+        else:
+            # Send the message if it's within the limit
+            await context.bot.send_message(
+                chat_id=effective_chat_id, text=response_message, reply_to_message_id=message_id,
+                parse_mode=telegram.constants.ParseMode.MARKDOWN_V2
+            )
+
 
     except Exception as e:
-        error_message = f"Error converting video to audio. Exception={e}"
+        error_message = f"Error converting audio to text. Exception={e}"
         await context.bot.send_message(chat_id=effective_chat_id, text=error_message, reply_to_message_id=message_id)
         pass
     finally:
